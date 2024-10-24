@@ -118,11 +118,6 @@ def abrir_nueva_ventana():
     tab_control.pack(expand=1, fill='both')
 
     # ----- Pestaña Principal -----
-    # Crear cuadro de búsqueda
-    lbl_buscar = tk.Label(tab_principal, text="Buscar:", font=('Arial', 14))
-    lbl_buscar.pack(pady=10)
-    entry_buscar = tk.Entry(tab_principal, width=50, font=('Arial', 14))
-    entry_buscar.pack(pady=10)
 
     # Crear tabla
     columnas = ("ID", "Nombre", "Descripción", "Marca", "Tamaño", "Tipo de Entrada", "Opciones")
