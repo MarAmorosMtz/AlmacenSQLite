@@ -12,7 +12,8 @@ CREATE TABLE productos (
     descripcion TEXT,
     marca TEXT,
     tamaño TEXT,
-    tipo_entrada TEXT
+    tipo_entrada TEXT,
+    cantidad int
 );
 """)
 
@@ -26,23 +27,23 @@ CREATE TABLE IF NOT EXISTS usuarios(
 """)
 
 # Insertar el usuario admin si no existe
-c.execute("""INSERT OR IGNORE INTO usuarios VALUES('admin', 'admin', 'su')""")
+c.execute("""INSERT OR IGNORE INTO usuarios VALUES('admin', 'admin', 'admin')""")
 conn.commit()
 
 # Función para agregar un producto a la base de datos
-def agregar_producto(id, nombre, descripcion, marca, tamaño, tipo_entrada):
+def agregar_producto(id, nombre, descripcion, marca, tamaño, tipo_entrada, cantidad):
     if id and nombre and marca and tamaño and tipo_entrada:
-        c.execute("INSERT INTO productos VALUES (?, ?, ?, ?, ?, ?)", (id, nombre, descripcion, marca, tamaño, tipo_entrada))
+        c.execute("INSERT INTO productos VALUES (?, ?, ?, ?, ?, ?, ?)", (id, nombre, descripcion, marca, tamaño, tipo_entrada, cantidad))
         conn.commit()
         print("Producto agregado correctamente")
     else:
         print("Todos los campos son obligatorios")
 
 # Función para actualizar un producto en la base de datos
-def editar_producto(id, nombre, descripcion, marca, tamaño, tipo_entrada):
+def editar_producto(id, nombre, descripcion, marca, tamaño, tipo_entrada, cantidad):
     if id and nombre and marca and tamaño and tipo_entrada:
-        c.execute("""UPDATE productos SET nombre=?, descripcion=?, marca=?, tamaño=?, tipo_entrada=? WHERE id=?""",
-                  (nombre, descripcion, marca, tamaño, tipo_entrada, id))
+        c.execute("""UPDATE productos SET nombre=?, descripcion=?, marca=?, tamaño=?, tipo_entrada=?, cantidad=? WHERE id=?""",
+                  (nombre, descripcion, marca, tamaño, tipo_entrada, cantidad, id))
         conn.commit()
         print("Producto actualizado correctamente")
     else:
@@ -69,10 +70,6 @@ def obtener_producto_por_id(id):
 # Cerrar la conexión con la base de datos (llamar al final del programa)
 def cerrar_conexion():
     conn.close()
-
-# Ejemplo de uso
-# Agregar un producto
-# agregar_producto('1', 'Producto 1', 'Descripción del producto 1', 'Marca A', 'Pequeño', 'Entrada Manual')
 
 # Cerrar la conexión
 cerrar_conexion()
