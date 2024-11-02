@@ -6,14 +6,14 @@ c = conn.cursor()
 
 # Crear la tabla de productos si no existe
 c.execute("""
-CREATE TABLE IF NOT EXISTS productos(
-    id TEXT PRIMARY KEY,
-    nombre TEXT NOT NULL,
+CREATE TABLE productos (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    nombre TEXT,
     descripcion TEXT,
     marca TEXT,
     tamaño TEXT,
     tipo_entrada TEXT
-)
+);
 """)
 
 # Crear la tabla de usuarios si no existe
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS usuarios(
     nombre TEXT,
     pass TEXT,
     rol TEXT
-)
+);
 """)
 
 # Insertar el usuario admin si no existe
@@ -72,7 +72,7 @@ def cerrar_conexion():
 
 # Ejemplo de uso
 # Agregar un producto
-agregar_producto('1', 'Producto 1', 'Descripción del producto 1', 'Marca A', 'Pequeño', 'Entrada Manual')
+# agregar_producto('1', 'Producto 1', 'Descripción del producto 1', 'Marca A', 'Pequeño', 'Entrada Manual')
 
 # Cerrar la conexión
 cerrar_conexion()

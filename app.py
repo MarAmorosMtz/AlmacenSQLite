@@ -197,11 +197,8 @@ def agregar_producto():
     tipo_entrada = entry_tipo_entrada.get()
 
     if nombre and descripcion and marca and tamaño and tipo_entrada:
-        # Obtener el próximo ID automático
-        c.execute("SELECT COUNT(*) FROM productos")
-        nuevo_id = c.fetchone()[0] + 1  # Genera un nuevo ID
-        c.execute("INSERT INTO productos (id, nombre, descripcion, marca, tamaño, tipo_entrada) VALUES (?, ?, ?, ?, ?, ?)",
-                  (nuevo_id, nombre, descripcion, marca, tamaño, tipo_entrada))
+        c.execute("INSERT INTO productos (nombre, descripcion, marca, tamaño, tipo_entrada) VALUES (?, ?, ?, ?, ?)",
+                  (nombre, descripcion, marca, tamaño, tipo_entrada))
         conn.commit()
         messagebox.showinfo("Agregar Producto", "Producto agregado correctamente.")
         actualizar_tabla()
